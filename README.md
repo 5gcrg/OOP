@@ -1,1 +1,1 @@
-my fist github and OOP project
+my first github and OOP project
