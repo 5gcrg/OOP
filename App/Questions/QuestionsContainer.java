@@ -49,29 +49,28 @@ public class QuestionsContainer extends JPanel implements ActionListener, checkA
 
     }
 
-
     // private AnswersContainer answersContainer;
     // @Override
     // public void loadAnswer(String[] answer) {
-       
-    //     String filename = "App/assets/answer.txt";
 
-    //     try {
-    //         BufferedReader br = new BufferedReader(new FileReader(filename));
-    //         String line;
-    //         String[] answers = new String[10];
-    //         while ((line = br.readLine()) != null) {
-    //             answers = line.split("\n");
-    //             for (String ans : answers) {
-    //                 System.out.println(ans);
-                    
-    //             }
-    //             answersContainer = new AnswersContainer(answers);
-    //         }
-    //         br.close();
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
+    // String filename = "App/assets/answer.txt";
+
+    // try {
+    // BufferedReader br = new BufferedReader(new FileReader(filename));
+    // String line;
+    // String[] answers = new String[10];
+    // while ((line = br.readLine()) != null) {
+    // answers = line.split("\n");
+    // for (String ans : answers) {
+    // System.out.println(ans);
+
+    // }
+    // answersContainer = new AnswersContainer(answers);
+    // }
+    // br.close();
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
 
     // }
 
@@ -79,7 +78,9 @@ public class QuestionsContainer extends JPanel implements ActionListener, checkA
         switch (i) {
             case 1:
                 System.out.println(1);
-                AnswerForm form = new AnswerForm();
+                String answers = "App/assets/answer.txt";
+                String questions = "App/assets/questions.txt";
+                AnswerForm form = new AnswerForm(questions, answers);
                 form.setVisible(true);
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(QuestionsContainer.this);
                 frame.setVisible(false);

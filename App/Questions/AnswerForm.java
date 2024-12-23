@@ -12,8 +12,9 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
     private int width = 720 / 2;
     private int height = 1280 / 2;
     private JButton checkBTN;
-
-    public AnswerForm() {
+    private String answers;
+    public AnswerForm(String questions_path,String answers) {
+        this.answers = answers;
         this.setTitle("Answer Form");
         this.setSize(new Dimension(width, height));
         this.setResizable(false);
@@ -24,7 +25,7 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(0, 1));
 
-        loadQuestions("App/assets/questions.txt", mainPanel);
+        loadQuestions(questions_path, mainPanel);
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16); 
@@ -69,12 +70,11 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
     }
 
     public void checkAnswer() {
-
         String[] user_answers = AnswerPanel.getUserAnswers(); // User's answers
         List<String> answersList = new ArrayList<>(); // Correct answers from file
-        String filename = "App/assets/answer.txt";
+        
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(answers))) {
             String line;
             while ((line = br.readLine()) != null) {
                 answersList.add(line.trim()); // Add each answer to the list
