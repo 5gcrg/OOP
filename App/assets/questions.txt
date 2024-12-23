@@ -1,0 +1,59 @@
+1. What is the capital of France?
+A) Berlin
+B) Madrid
+C) Paris
+D) Rome
+
+2. Which element has the chemical symbol 'O'?
+A) Oxygen
+B) Gold
+C) Silver
+D) Helium
+
+3. Who wrote the play 'Romeo and Juliet'?
+A) Mark Twain
+B) William Shakespeare
+C) Charles Dickens
+D) J.K. Rowling
+
+4. What is the largest planet in our Solar System?
+A) Earth
+B) Mars
+C) Jupiter
+D) Venus
+
+5. What is the speed of light?
+A) 300,000 km/s
+B) 150,000 km/s
+C) 100,000 km/s
+D) 50,000 km/s
+
+6. Which artist painted the Mona Lisa?
+A) Vincent van Gogh
+B) Pablo Picasso
+C) Leonardo da Vinci
+D) Claude Monet
+
+7. What is the smallest unit of life?
+A) Atom
+B) Molecule
+C) Cell
+D) Organ
+
+8. Who is known as the 'Father of Computer Science'?
+A) Albert Einstein
+B) Isaac Newton
+C) Charles Babbage
+D) Alan Turing
+
+9. Which country is famous for the Great Wall?
+A) India
+B) Egypt
+C) China
+D) Greece
+
+10. What is the boiling point of water at sea level?
+A) 90°C
+B) 100°C
+C) 110°C
+D) 120°C
