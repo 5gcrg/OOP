@@ -73,20 +73,29 @@ public class QuestionsContainer extends JPanel implements ActionListener, checkA
     // }
 
     // }
+    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(QuestionsContainer.this);
 
     private void buttonAction(int i) {
+        String answers = "";
+        String questions = "";
         switch (i) {
             case 1:
                 System.out.println(1);
-                String answers = "App/assets/answer.txt";
-                String questions = "App/assets/questions.txt";
+                answers = "App/assets/answer.txt";
+                questions = "App/assets/questions.txt";
                 AnswerForm form = new AnswerForm(questions, answers);
                 form.setVisible(true);
-                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(QuestionsContainer.this);
+                frame = (JFrame) SwingUtilities.getWindowAncestor(QuestionsContainer.this);
                 frame.setVisible(false);
                 break;
             case 2:
                 System.out.println(2);
+                answers = "App/assets/answer_level2.txt";
+                questions = "App/assets/questions_level2.txt";
+                AnswerForm form2 = new AnswerForm(questions, answers);
+                form2.setVisible(true);
+                frame = (JFrame) SwingUtilities.getWindowAncestor(QuestionsContainer.this);
+                frame.setVisible(false);
                 break;
             case 3:
                 System.out.println(3);

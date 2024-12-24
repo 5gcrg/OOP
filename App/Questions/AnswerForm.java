@@ -7,18 +7,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+import main.MainFrame;
+
 public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
 
-    private int width = 720 / 2;
+    private int width = 480 ;
     private int height = 1280 / 2;
     private JButton checkBTN;
     private String answers;
-    public AnswerForm(String questions_path,String answers) {
+    private int index;
+
+    public AnswerForm(String questions_path, String answers) {
         this.answers = answers;
         this.setTitle("Answer Form");
         this.setSize(new Dimension(width, height));
         this.setResizable(false);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
         // Main panel to hold all AnswerPanels
@@ -28,7 +32,7 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
         loadQuestions(questions_path, mainPanel);
 
         JScrollPane scrollPane = new JScrollPane(mainPanel);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16); 
+        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
         scrollPane.getVerticalScrollBar().setBlockIncrement(32);
         scrollPane.setPreferredSize(new Dimension(width, height));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -56,12 +60,13 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
                 for (int i = 0; i < 4; i++) {
                     line = reader.readLine();
                     if (line != null && line.length() > 3) {
-                        options[i] = line.substring(3).trim(); // Remove the "A)", "B)", etc.
+                        options[i] = line; // Remove the "A)", "B)", etc.
                     }
                 }
 
                 // Add an AnswerPanel for this question
-                mainPanel.add(new AnswerPanel(question, options));
+                mainPanel.add(new AnswerPanel(question, options, index));
+                index++;
             }
             reader.close();
         } catch (IOException e) {
@@ -69,10 +74,18 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
         }
     }
 
+    private MainFrame mainFrame = new MainFrame();
+
     public void checkAnswer() {
+
+        if (AnswerPanel.isNull()) {
+            JOptionPane.showMessageDialog(null, "You still have unanswered Questions!",
+                    "No answer", JOptionPane.WARNING_MESSAGE);
+                    return;
+        }
+
         String[] user_answers = AnswerPanel.getUserAnswers(); // User's answers
         List<String> answersList = new ArrayList<>(); // Correct answers from file
-        
 
         try (BufferedReader br = new BufferedReader(new FileReader(answers))) {
             String line;
@@ -102,13 +115,23 @@ public class AnswerForm extends JFrame implements ActionListener, checkAnswer {
         }
 
         System.out.println("Your score is: " + score + "/" + answers.length);
-        JOptionPane.showMessageDialog(this, "Your score is: " + score + "/" + answers.length);
+        int ans = JOptionPane.showConfirmDialog(this, "Your score is: " + score + "/" +
+                answers.length, "Score", JOptionPane.OK_OPTION);
+
+        if (ans == JOptionPane.OK_OPTION) {
+            score = 0;
+            AnswerPanel.resetUserAnswers();
+            this.dispose();
+            mainFrame.setVisible(true);
+        }
+        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == checkBTN) {
             checkAnswer();
+
         }
 
     }
@@ -126,10 +149,12 @@ class AnswerPanel extends JPanel implements ItemListener, checkAnswer {
     private JLabel question;
     private JRadioButton[] options = new JRadioButton[4];
     private ButtonGroup optionsGroup;
-    private static List<String> userAnswers = new ArrayList<>();
+    private static String[] userAnswers;
     static int count = 0;
+    private int question_index;
 
-    public AnswerPanel(String questionText, String[] choices) {
+    public AnswerPanel(String questionText, String[] choices, int question_index) {
+        this.question_index = question_index;
         setLayout(new GridLayout(5, 1));
 
         // Initialize the question label
@@ -148,7 +173,9 @@ class AnswerPanel extends JPanel implements ItemListener, checkAnswer {
         for (JRadioButton option : options) {
             optionsGroup.add(option);
         }
-
+        if (userAnswers == null) {
+            userAnswers = new String[10];
+        }
     }
 
     @Override
@@ -183,12 +210,31 @@ class AnswerPanel extends JPanel implements ItemListener, checkAnswer {
     }
 
     public void saveAnswers(String answers) {
-        userAnswers.add(answers);
+        userAnswers[question_index] = answers;
 
     }
 
+    public static boolean isNull() {
+        for (int i = 0; i < userAnswers.length; i++) {
+            if (userAnswers[i]==null || userAnswers[i].trim().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static void resetUserAnswers() {
+        if (userAnswers != null) {
+            for (int i = 0; i < userAnswers.length; i++) {
+                userAnswers[i] = null;
+            }
+        }
+    }
+    
+
     public static String[] getUserAnswers() {
-        return userAnswers.toArray(new String[0]);
+        return userAnswers;
     }
 
     @Override

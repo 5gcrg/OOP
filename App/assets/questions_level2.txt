@@ -1,0 +1,59 @@
+1. Which data type is used to store a sequence of characters in Java?
+A) int
+B) float
+C) String
+D) char
+
+2. What does "int" stand for in programming?
+A) Integer
+B) International
+C) Interactive
+D) Internal
+
+3. Which keyword is used to declare a variable in Java?
+A) define
+B) var
+C) let
+D) int
+
+4. What is the starting index of an array in most programming languages like Java?
+A) 0
+B) 1
+C) -1
+D) 2
+
+5. How do you write a single-line comment in Java?
+A) //
+B) #
+C) /* */
+D) <!-- -->
+
+6. Which loop is used to iterate a fixed number of times?
+A) while
+B) for
+C) do-while
+D) if
+
+7. What is the output of the following code? System.out.println(5 + 3);
+A) 53
+B) 8
+C) Error
+D) None of the above
+
+8. What does the keyword "void" indicate in a method declaration?
+A) The method returns a value
+B) The method does not return a value
+C) The method is private
+D) The method is static
+
+9. How do you print "Hello, World!" to the console in Java?
+A) Console.print("Hello, World!");
+B) print("Hello, World!");
+C) System.out.println("Hello, World!");
+D) echo "Hello, World!";
+
+10. Which operator is used for equality comparison in Java?
+A) =
+B) ==
+C) ===
+D) !=
